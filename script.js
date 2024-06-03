@@ -37,16 +37,24 @@ let displayValue = '';
 
 const display = document.querySelector('.display');
 
-const buttonValue = document.querySelectorAll('.digit');
-buttonValue.forEach(button => {
-    button.addEventListener("click",()=>{
-        let digit = this.textContent;
-        addToDisplay(digit);
+const digitContainer = document.querySelector('.digit');
+const buttonValues = digitContainer.querySelectorAll('button');
+
+buttonValues.forEach(button => {
+    button.addEventListener('click',()=>{
+        let number = button.textContent;
+        addToDisplay(number);
+        console.log(number);
     })
 })
 
-const addToDisplay = function(digit){
-    displayValue += digit;
+const addToDisplay = function(number){
+    if (number === 0){
+        displayValue = number;
+    }
+    else{
+        displayValue += number;
+    }
     updateDisplay();
 }
 const updateDisplay = function(){
