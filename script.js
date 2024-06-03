@@ -32,3 +32,23 @@ const operate = function(operator, firstNumber, secondNumber){
         return divide(firstNumber, secondNumber);
     }
 }
+
+let displayValue = '';
+
+const display = document.querySelector('.display');
+
+const buttonValue = document.querySelectorAll('.digit');
+buttonValue.forEach(button => {
+    button.addEventListener("click",()=>{
+        let digit = this.textContent;
+        addToDisplay(digit);
+    })
+})
+
+const addToDisplay = function(digit){
+    displayValue += digit;
+    updateDisplay();
+}
+const updateDisplay = function(){
+    display.textContent = displayValue;
+}
