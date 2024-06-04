@@ -38,7 +38,7 @@ const operate = function(){
         default:
             result = 'Error';
     }
-    displayValue = result;
+    displayValue = result.toString();
     updateDisplay();
 }
 
@@ -47,17 +47,15 @@ const clear = function(){
     if (displayValue === ''){
         displayValue = 0;
     }
-    updateDisplay();
 }
 const reset = function(){
     displayValue = '0';
     firstNumber = '';
     secondNumber = '';
     operator = '';
-    updateDisplay();
 }
 
-
+const display = document.querySelector('.display');
 const buttonContainer = document.querySelector('.container');
 const buttons = buttonContainer.querySelectorAll('button');
 
@@ -85,17 +83,19 @@ buttons.forEach(button => {
         else if (currentValue === 'AC'){
             reset();
         }
-        else {  
+        else { 
+            if (secondNumber != ''){
+                operate();
+                firstNumber = displayValue;
+                secondNumber = '';
+            }
             operator = currentValue;
-            displayValue = operator;   
-            console.log(operator);
         }
         updateDisplay();
     })
 })
 
 const updateDisplay = function(){
-    const display = document.querySelector('.display');
     display.textContent = displayValue;
 }
 
