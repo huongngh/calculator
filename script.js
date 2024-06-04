@@ -38,7 +38,7 @@ const operate = function(){
         default:
             result = 'Error';
     }
-    displayValue = result.toString();
+    displayValue = result.toFixed(8).toString();
     updateDisplay();
 }
 
