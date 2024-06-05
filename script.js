@@ -18,7 +18,42 @@ let displayValue = '0';
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
+let decimalAdded = false;
 
+const appendNumber = function(value){
+    if (operator === ''){
+        firstNumber += value;
+        displayValue = firstNumber;
+    }
+    else{
+        secondNumber += value;
+        displayValue = secondNumber; 
+    }
+}
+
+const appendDecimal = function(){
+    if (!decimalAdded){
+        if (operator === ''){
+            firstNumber += '.';
+            displayValue = firstNumber;
+        }
+        else {
+            secondNumber += '.';
+            displayValue = secondNumber;
+        }
+        decimalAdded = true;
+    }
+}
+
+const setOperator = function(value){
+    if (secondNumber != ''){
+        operate();
+        firstNumber = displayValue;
+        secondNumber = '';
+    }
+    operator = value;
+    decimalAdded = false;
+}
 
 const operate = function(){
     let result;
@@ -38,14 +73,33 @@ const operate = function(){
         default:
             result = 'Error';
     }
-    displayValue = result.toFixed(8).toString();
+    if (Number.isInteger(result)){
+        result = result.toFixed(0);
+    }
+    else{
+        result = result.toFixed(6);
+    }
+    displayValue = result.toString();
+    decimalAdded = false;
     updateDisplay();
 }
 
-const clear = function(){
-    displayValue = displayValue.slice(0, -1);
-    if (displayValue === ''){
-        displayValue = 0;
+const calculate = function(){
+    if (firstNumber === '' && secondNumber === '' && operator === ''){
+        displayValue = NaN;
+    }
+    else {
+        operate();
+    }
+}
+const backspace = function(){
+    if (operator === ''){
+        firstNumber = firstNumber.slice(0, -1);
+        displayValue = firstNumber;
+    }
+    else{
+        secondNumber = secondNumber.slice(0, -1);
+        displayValue = secondNumber;
     }
 }
 const reset = function(){
@@ -53,6 +107,7 @@ const reset = function(){
     firstNumber = '';
     secondNumber = '';
     operator = '';
+    decimalAdded = false;
 }
 
 const display = document.querySelector('.display');
@@ -61,41 +116,30 @@ const buttons = buttonContainer.querySelectorAll('button');
 
 buttons.forEach(button => {
     button.addEventListener('click',() => {
-        let currentValue = button.textContent;
+        let currentValue = button.innerText;
         if (!isNaN(currentValue)){
-            if (operator === ''){
-                firstNumber += currentValue;
-                displayValue = firstNumber;
-                console.log(firstNumber);
-            }
-            else{
-                secondNumber += currentValue;
-                displayValue = secondNumber;    
-                console.log(secondNumber);
-            }
+            appendNumber(currentValue);
+        }
+        else if (currentValue === '.'){
+            appendDecimal();
         }
         else if (currentValue === '='){
-            operate();
+            calculate();
         }
         else if (currentValue === 'C'){
-            clear();
+            backspace();
         }
         else if (currentValue === 'AC'){
             reset();
         }
         else { 
-            if (secondNumber != ''){
-                operate();
-                firstNumber = displayValue;
-                secondNumber = '';
-            }
-            operator = currentValue;
+            setOperator(currentValue);
         }
         updateDisplay();
     })
 })
 
 const updateDisplay = function(){
-    display.textContent = displayValue;
+    display.innerText = displayValue;
 }
 
