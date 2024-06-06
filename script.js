@@ -1,3 +1,53 @@
+let displayValue = '0';
+let firstNumber = '';
+let secondNumber = '';
+let operator = '';
+let decimalAdded = false;
+
+const display = document.querySelector('.display');
+const buttonContainer = document.querySelector('.container');
+const buttons = buttonContainer.querySelectorAll('button');
+
+
+
+const appendNumber = function(value){
+    if (operator === ''){
+        firstNumber += value;
+        displayValue = firstNumber;
+    }
+    else{
+        secondNumber += value;
+        displayValue = secondNumber; 
+    }
+}
+
+
+const appendDecimal = function(){
+    if (!decimalAdded){
+        if (operator === ''){
+            firstNumber += '.';
+            displayValue = firstNumber;
+        }
+        else {
+            secondNumber += '.';
+            displayValue = secondNumber;
+        }
+        decimalAdded = true;
+    }
+}
+
+
+const setOperator = function(value){
+    if (secondNumber != ''){
+        operate();
+        firstNumber = displayValue;
+        secondNumber = '';
+    }
+    operator = value;
+    decimalAdded = false;
+}
+
+
 const add = function(a, b){
     return parseFloat(a) + parseFloat(b);
 }
@@ -14,46 +64,6 @@ const divide = function(a, b){
     return parseFloat(a)/parseFloat(b);
 }
 
-let displayValue = '0';
-let firstNumber = '';
-let secondNumber = '';
-let operator = '';
-let decimalAdded = false;
-
-const appendNumber = function(value){
-    if (operator === ''){
-        firstNumber += value;
-        displayValue = firstNumber;
-    }
-    else{
-        secondNumber += value;
-        displayValue = secondNumber; 
-    }
-}
-
-const appendDecimal = function(){
-    if (!decimalAdded){
-        if (operator === ''){
-            firstNumber += '.';
-            displayValue = firstNumber;
-        }
-        else {
-            secondNumber += '.';
-            displayValue = secondNumber;
-        }
-        decimalAdded = true;
-    }
-}
-
-const setOperator = function(value){
-    if (secondNumber != ''){
-        operate();
-        firstNumber = displayValue;
-        secondNumber = '';
-    }
-    operator = value;
-    decimalAdded = false;
-}
 
 const operate = function(){
     let result;
@@ -71,7 +81,7 @@ const operate = function(){
             result = divide(firstNumber, secondNumber);
             break;
         default:
-            result = 'Error';
+            result = NaN;
     }
     if (Number.isInteger(result)){
         result = result.toFixed(0);
@@ -84,6 +94,7 @@ const operate = function(){
     updateDisplay();
 }
 
+
 const calculate = function(){
     if (firstNumber === '' && secondNumber === '' && operator === ''){
         displayValue = NaN;
@@ -92,6 +103,8 @@ const calculate = function(){
         operate();
     }
 }
+
+
 const backspace = function(){
     if (operator === ''){
         firstNumber = firstNumber.slice(0, -1);
@@ -102,6 +115,8 @@ const backspace = function(){
         displayValue = secondNumber;
     }
 }
+
+
 const reset = function(){
     displayValue = '0';
     firstNumber = '';
@@ -110,9 +125,11 @@ const reset = function(){
     decimalAdded = false;
 }
 
-const display = document.querySelector('.display');
-const buttonContainer = document.querySelector('.container');
-const buttons = buttonContainer.querySelectorAll('button');
+
+const updateDisplay = function(){
+    display.innerText = displayValue;
+}
+
 
 buttons.forEach(button => {
     button.addEventListener('click',() => {
@@ -139,7 +156,5 @@ buttons.forEach(button => {
     })
 })
 
-const updateDisplay = function(){
-    display.innerText = displayValue;
-}
+
 
