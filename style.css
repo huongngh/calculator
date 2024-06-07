@@ -1,7 +1,76 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 60%;
+    max-inline-size: 22rem;
+    border-radius: 10px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    margin-block-start: 2em;
+    box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.15), 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
 .display{
-    background-color:antiquewhite;
-    border: 1px solid black;
-    margin: 20px;
-    padding:20px;
-    text-align: right;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 100%;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 2rem;
+    background: hsl(202, 11%, 29%);
+    color: hsl(255, 100%, 100%);
+    padding-block-start: 0.5rem;
+    padding-block-end: 0.5rem;
+    padding-inline-end: 0.75rem;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 1 500%;
+    border: 1px;
+    background: hsl(207, 19%, 61%);
+}
+
+button{
+    display: flex;
+    flex: 0 1 25%;
+    justify-content: center;
+    align-items:center;
+    border: none;
+    background: hsl(210, 25%, 95%);
+    padding-block-start: 0.5rem; 
+    padding-block-end: 0.5rem; 
+    padding-inline-start: 1.25rem; 
+    padding-inline-end: 1.25rem;
+    font-size: 1.2rem;
+}
+
+button:active,
+button:focus{
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3) inset;
+    outline: none;
+}
+
+.operatorButton{
+    background: hsl(208, 25%, 86%);
+}
+
+.operatorButton:active{
+    background: hsl(208, 24%, 80%);
+}
+
+.equalKey{
+    background: hsl(357, 100%, 72%);
 }
