@@ -83,12 +83,11 @@ const operate = function(){
             break;
     }
     if (Number.isInteger(result)){
-        result = result.toFixed(0);
+        displayValue = result.toString();
     }
     else{
-        result = result.toFixed(6);
+        displayValue = result.toFixed(6).toString();
     }
-    displayValue = result.toString();
     decimalAdded = false;
     updateDisplay();
 }
@@ -102,7 +101,6 @@ const calculate = function(){
         operate();
     }
 }
-
 
 
 const percentCalculate = function(){
