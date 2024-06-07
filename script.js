@@ -4,8 +4,9 @@ let secondNumber = '';
 let operator = '';
 let decimalAdded = false;
 
-const display = document.querySelector('.display');
-const buttonContainer = document.querySelector('.container');
+const calculator = document.querySelector('.calculator')
+const display = calculator.querySelector('.display');
+const buttonContainer = calculator.querySelector('.buttonContainer');
 const buttons = buttonContainer.querySelectorAll('button');
 
 
@@ -80,8 +81,6 @@ const operate = function(){
         case ('/'):
             result = divide(firstNumber, secondNumber);
             break;
-        default:
-            result = NaN;
     }
     if (Number.isInteger(result)){
         result = result.toFixed(0);
@@ -104,6 +103,19 @@ const calculate = function(){
     }
 }
 
+
+
+const percentCalculate = function(){
+    if (firstNumber === '' && secondNumber === ''){
+        displayValue = '0';
+    }
+    else if (firstNumber !== ''){
+            displayValue = parseFloat(firstNumber/100);
+    }
+    else {
+            displayValue = parseFloat(secondNumber/100);
+    }
+}
 
 const backspace = function(){
     if (operator === ''){
@@ -143,11 +155,14 @@ buttons.forEach(button => {
         else if (currentValue === '='){
             calculate();
         }
-        else if (currentValue === 'C'){
+        else if (currentValue === '\u2190'){
             backspace();
         }
         else if (currentValue === 'AC'){
             reset();
+        }
+        else if (currentValue === '%'){
+            percentCalculate(currentValue);
         }
         else { 
             setOperator(currentValue);

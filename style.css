@@ -11,8 +11,8 @@ body{
 .calculator{
     display: flex;
     flex-wrap: wrap;
-    flex: 0 1 60%;
-    min-width: 400px;
+    flex: 0 1 calc(60%);
+    max-width: 20rem;
     border-radius: 10px;
     margin-inline-start: auto;
     margin-inline-end: auto;
@@ -37,24 +37,24 @@ body{
 .buttonContainer{
     display: flex;
     flex-wrap: wrap;
-    flex: 0 1 500%;
+    flex: 0 1 100%;
     border: 1px;
     background: hsl(207, 19%, 61%);
 }
 
 button{
-    height: 50px;
+    height: 70px;
     display: flex;
-    flex: 0 1 25%;
+    flex: 0 1 calc(25%);
     justify-content: center;
     align-items:center;
     border: none;
     background: hsl(210, 25%, 95%);
     font-size: 1.2rem;
-    inline-size: 60px;
-    block-size: 60px;
-
-    
+    padding-block-start: 1rem;
+    padding-block-end: 1rem;
+    padding-inline-end: 1.25rem;
+    padding-inline-start: 1.25rem;  
 }
 
 button:active,
@@ -75,6 +75,10 @@ button:focus{
     background: hsl(357, 100%, 72%);
 }
 
-button:nth-child(-n+4){
+button:nth-child(17){
+    flex-grow: 2;
+}
+
+button:nth-child(4n){
     background: hsl(208, 25%, 86%);
 }
